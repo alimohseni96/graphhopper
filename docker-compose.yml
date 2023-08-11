@@ -1,0 +1,26 @@
+version: '3'
+services:
+  graphhopper:
+    image: israelhikingmap/graphhopper
+    volumes: 
+      - ./map:/data
+    environment:
+      JAVA_OPTS: "-Xmx1g -Xms1g"
+    entrypoint: /bin/bash
+    command: -c " java -Ddw.graphhopper.datareader.file=/data/iran-latest.osm.pbf -Ddw.graphhopper.graph.location=iran-gh -jar *.jar server config-example.yml"
+    ports:
+      - 8989:8989
+    profiles:      
+      - graphhopper
+    networks:
+      - omega
+
+    
+
+networks:
+  omega:
+
+
+volumes:
+  graphhopper:
+
